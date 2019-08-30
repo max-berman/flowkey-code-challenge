@@ -5,12 +5,27 @@ const getMongoConnection = require("./getMongoConnection");
 // don't require a separate mongodb instance to run
 new MongoMemoryServer({ instance: { port: 27017 } });
 
-// this API is just an example, you can modify any parts if needed for the task
+// // this API is just an example, you can modify any parts if needed for the task
+// const typeDefs = gql`
+//     type Song {
+//         _id: ID!
+//         title: String
+//         keyStrokes: [String]
+//     }
+
+//     type Query {
+//         songs: [Song]
+//     }
+
+//     type Mutation {
+//         addSong(title: String, keyStrokes: [String]): Song
+//     }
+// `;
 const typeDefs = gql`
     type Song {
         _id: ID!
         title: String
-        keyStrokes: [String]
+        keyStrokes: [Int]
     }
 
     type Query {
@@ -18,7 +33,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addSong(title: String, keyStrokes: [String]): Song
+        addSong(title: String, keyStrokes: [Int]): Song
     }
 `;
 
