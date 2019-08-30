@@ -15,12 +15,12 @@ import RecordInput from "./components/RecordInput";
 
 /* 
   key,
-  time,
+  time-sequence,
   span,
 */
 
 let playTimeOut = [];
-const ALL_SONGS_QUERY = gql`
+const ALL_RECORDS_QUERY = gql`
   query {
     songs {
       _id
@@ -45,7 +45,8 @@ function App() {
   const [isRecording, setIsRecording] = useState(false);
   const [activeNotes, setActiveNotes] = useState([]);
   const [recordedNotes, setRecordedNotes] = useState([]);
-  const { loading, error, data, refetch } = useQuery(ALL_SONGS_QUERY);
+  const [timeEvents, setTimeEvents] = useState([]);
+  const { loading, error, data, refetch } = useQuery(ALL_RECORDS_QUERY);
   const [addSong] = useMutation(MUTATION);
 
   function setRecordings(title, keyStrokes) {
@@ -63,7 +64,7 @@ function App() {
     notes.forEach((note, i) => {
       playTimeOut[i] = setTimeout(() => {
         setActiveNotes([note]);
-      }, i * 500);
+      }, i * 200);
     });
   }
   function cancelPlayRecord(notes) {
@@ -99,7 +100,11 @@ function App() {
     setActiveNotes,
     cancelAllPlayRecords,
     setIsPianoLoaded,
+    timeEvents,
+    setTimeEvents,
   };
+  //console.log(timeEvents);
+  //console.log(recordedNotes);
 
   return (
     <div className="App">

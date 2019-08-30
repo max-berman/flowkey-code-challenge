@@ -34,10 +34,7 @@ function RecordInput({ playRecord, cancelPlayRecord, recordedNotes, recordings, 
       setIsNameValid(false);
       return;
     }
-
-    //setRecordings(recordings.concat({ keyStrokes: recordedNotes, name: recordName }));
     setRecordings(recordName, recordedNotes);
-
     handleCancelOnClick();
   }
 
@@ -54,7 +51,7 @@ function RecordInput({ playRecord, cancelPlayRecord, recordedNotes, recordings, 
       <input style={inputButtonStyle} type="button" value="▶︎" onClick={handlePlayOnClick} />
       <input
         style={{ borderColor: recordName === "" && !isNameValid && "red", ...inputStyle }}
-        placeholder="Give It a Name"
+        placeholder="Give it a Name"
         value={recordName}
         onChange={handleRecordNameChange}
         autoFocus
